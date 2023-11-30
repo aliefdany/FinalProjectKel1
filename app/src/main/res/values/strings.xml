@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">FinalProjectKel1</string>
+    <string name="header_view">Header view</string>
+    <string name="profile_pic">Profile pic</string>
+</resources>
