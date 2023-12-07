@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -33,6 +34,8 @@ public class HomeFragment extends Fragment implements ValueEventListener {
     private List<Mahasiswa> listMahasiswa;
     private MahasiswaAdapter adapterMahasiswa;
     private EditText etCari;
+
+    private ProgressBar dbLoading;
 
     private String url = "https://final-project-papb-de61c-default-rtdb.asia-southeast1.firebasedatabase.app/";
     private DatabaseReference db;
@@ -80,6 +83,8 @@ public class HomeFragment extends Fragment implements ValueEventListener {
                     map.get("alamat").toString(),
                     map.get("phoneNumber").toString()));
         }
+
+        this.layout.findViewById(R.id.dbLoading).setVisibility(ProgressBar.GONE);
 
         this.rvMahasiswa = this.layout.findViewById(R.id.rvMahasiswa);
 

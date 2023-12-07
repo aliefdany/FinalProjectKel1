@@ -64,6 +64,8 @@ public class AddStudentActivity extends AppCompatActivity implements View.OnClic
             );
 
             this.appDb.child(this.etNIM.getText().toString()).setValue(mahasiswa);
+
+            finish();
         }
     }
 }
