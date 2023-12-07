@@ -72,7 +72,7 @@ public class EditStudent extends AppCompatActivity implements ValueEventListener
                 map.get("fakultas").toString(),
                 map.get("email").toString(),
                 map.get("alamat").toString(),
-                map.get("phoneNumber").toString());
+                map.get("phoneNumber").toString(), null);
 
         this.etNamaMahasiswa.setText(this.mahasiswa.getName());
         this.etNIM.setText(this.mahasiswa.getNIM());
@@ -99,7 +99,8 @@ public class EditStudent extends AppCompatActivity implements ValueEventListener
                     this.etFakultas.getText().toString(),
                     this.etEmail.getText().toString(),
                     this.etAlamat.getText().toString(),
-                    this.etPhone.getText().toString()
+                    this.etPhone.getText().toString(),
+                    null
             );
 
             this.appDb.child(this.etNIM.getText().toString()).setValue(mahasiswa);

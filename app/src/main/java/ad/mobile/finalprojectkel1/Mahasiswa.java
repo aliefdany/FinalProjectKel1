@@ -1,5 +1,7 @@
 package ad.mobile.finalprojectkel1;
 
+import com.google.firebase.database.DatabaseReference;
+
 public class Mahasiswa {
     private String name;
     private String NIM;
@@ -9,13 +11,16 @@ public class Mahasiswa {
     private String alamat;
     private String phoneNumber;
 
+    public DatabaseReference dbRef;
+
     public Mahasiswa(String name,
                      String NIM,
                      String prodi,
                      String fakultas,
                      String alamat,
                      String email,
-                     String phoneNumber) {
+                     String phoneNumber,
+                     DatabaseReference dbRef) {
         this.name = name;
         this.NIM = NIM;
         this.prodi = prodi;
@@ -23,6 +28,7 @@ public class Mahasiswa {
         this.alamat = alamat;
         this.email = email;
         this.phoneNumber = phoneNumber;
+        this.dbRef = dbRef;
     }
 
     public String getName() {

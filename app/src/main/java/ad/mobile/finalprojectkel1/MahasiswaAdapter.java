@@ -3,6 +3,8 @@ package ad.mobile.finalprojectkel1;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,6 +18,8 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.google.firebase.database.DatabaseReference;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -37,16 +41,16 @@ public class MahasiswaAdapter extends RecyclerView.Adapter<MahasiswaAdapter.Item
                 String searchLower = search.toString().toLowerCase();
 
                 FilterResults results = new FilterResults();
-                ArrayList<Mahasiswa> filteredTweets = new ArrayList<>();
+                ArrayList<Mahasiswa> filteredMahasiswa = new ArrayList<>();
 
                 for(Mahasiswa c: dataOriginal) {
                     if (c.getName().toLowerCase().contains(searchLower) || c.getNIM().toLowerCase().contains(searchLower)) {
-                        filteredTweets.add(c);
+                        filteredMahasiswa.add(c);
                     }
                 }
 
-                results.values = filteredTweets;
-                results.count = filteredTweets.size();
+                results.values = filteredMahasiswa;
+                results.count = filteredMahasiswa.size();
                 return results;
             }
 
@@ -75,6 +79,8 @@ public class MahasiswaAdapter extends RecyclerView.Adapter<MahasiswaAdapter.Item
 
         Mahasiswa k = this.data.get(position);
 
+        holder.dbRef = k.dbRef;
+
         holder.tvNamaMahasiswa.setText(k.getName());
         holder.tvNIM.setText(k.getNIM());
     }
@@ -100,6 +106,8 @@ public class MahasiswaAdapter extends RecyclerView.Adapter<MahasiswaAdapter.Item
         private TextView tvNIM;
 
         private ImageButton btDeleteMahasiswa;
+
+        public DatabaseReference dbRef;
 
 
         public ItemVH(@NonNull View itemView) {
@@ -129,17 +137,14 @@ public class MahasiswaAdapter extends RecyclerView.Adapter<MahasiswaAdapter.Item
 
 //            dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
 
-            dialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
+//            dialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
 
             Button btConfirmDeleteTweet = (Button) dialog.findViewById(R.id.btConfirmDeleteTweet);
 
             btConfirmDeleteTweet.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-
-                    Log.d("Removing tweet with index", String.valueOf(getAdapterPosition()));
-
-                    removeAt(getAdapterPosition());
+                    dbRef.removeValue();
 
                     dialog.dismiss();
 

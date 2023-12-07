@@ -1,6 +1,8 @@
 package ad.mobile.finalprojectkel1;
 
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -33,7 +35,7 @@ public class HomeFragment extends Fragment implements ValueEventListener {
     private RecyclerView rvMahasiswa;
     private List<Mahasiswa> listMahasiswa;
     private MahasiswaAdapter adapterMahasiswa;
-    private EditText etCari;
+    private EditText tvSearch;
 
     private ProgressBar dbLoading;
 
@@ -81,10 +83,29 @@ public class HomeFragment extends Fragment implements ValueEventListener {
                     map.get("fakultas").toString(),
                     map.get("email").toString(),
                     map.get("alamat").toString(),
-                    map.get("phoneNumber").toString()));
+                    map.get("phoneNumber").toString(),
+                    snap.getRef()));
         }
 
         this.layout.findViewById(R.id.dbLoading).setVisibility(ProgressBar.GONE);
+
+        this.tvSearch = this.layout.findViewById(R.id.etSearch);
+        this.tvSearch.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                handleSearch(editable.toString());
+            }
+        });
 
         this.rvMahasiswa = this.layout.findViewById(R.id.rvMahasiswa);
 
@@ -96,6 +117,10 @@ public class HomeFragment extends Fragment implements ValueEventListener {
         this.rvMahasiswa.setAdapter(this.adapterMahasiswa);
 
         this.adapterMahasiswa.notifyDataSetChanged();
+    }
+
+    public void handleSearch(String searchParams) {
+        this.adapterMahasiswa.getFilter().filter(searchParams);
     }
 
     @Override

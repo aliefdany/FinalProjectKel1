@@ -60,7 +60,8 @@ public class AddStudentActivity extends AppCompatActivity implements View.OnClic
                     this.etFakultas.getText().toString(),
                     this.etEmail.getText().toString(),
                     this.etAlamat.getText().toString(),
-                    this.etPhone.getText().toString()
+                    this.etPhone.getText().toString(),
+                    null
             );
 
             this.appDb.child(this.etNIM.getText().toString()).setValue(mahasiswa);
