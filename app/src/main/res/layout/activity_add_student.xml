@@ -76,12 +76,13 @@
                 android:layout_marginBottom="16dp"
                 android:background="@drawable/input_box"
                 android:ems="10"
+                android:fontFamily="@font/poppins_medium"
+                android:hint="Nama Mahasiswa"
                 android:inputType="text"
                 android:paddingStart="12dp"
                 android:paddingTop="12dp"
                 android:paddingEnd="12dp"
                 android:paddingBottom="12dp"
-                android:text="Nama Mahasiswa"
                 app:layout_constraintEnd_toEndOf="parent" />
 
             <EditText
@@ -94,12 +95,13 @@
                 android:layout_marginBottom="16dp"
                 android:background="@drawable/input_box"
                 android:ems="10"
+                android:fontFamily="@font/poppins_medium"
+                android:hint="NIM"
                 android:inputType="text"
                 android:paddingStart="12dp"
                 android:paddingTop="12dp"
                 android:paddingEnd="12dp"
                 android:paddingBottom="12dp"
-                android:text="NIM"
                 app:layout_constraintEnd_toEndOf="parent" />
 
             <EditText
@@ -112,12 +114,13 @@
                 android:layout_marginBottom="16dp"
                 android:background="@drawable/input_box"
                 android:ems="10"
+                android:fontFamily="@font/poppins_medium"
+                android:hint="Program Studi"
                 android:inputType="text"
                 android:paddingStart="12dp"
                 android:paddingTop="12dp"
                 android:paddingEnd="12dp"
                 android:paddingBottom="12dp"
-                android:text="Program Studi"
                 app:layout_constraintEnd_toEndOf="parent" />
 
             <EditText
@@ -130,12 +133,13 @@
                 android:layout_marginBottom="16dp"
                 android:background="@drawable/input_box"
                 android:ems="10"
+                android:fontFamily="@font/poppins_medium"
+                android:hint="Fakultas"
                 android:inputType="text"
                 android:paddingStart="12dp"
                 android:paddingTop="12dp"
                 android:paddingEnd="12dp"
                 android:paddingBottom="12dp"
-                android:text="Fakultas"
                 app:layout_constraintEnd_toEndOf="parent" />
 
             <EditText
@@ -148,12 +152,13 @@
                 android:layout_marginBottom="16dp"
                 android:background="@drawable/input_box"
                 android:ems="10"
+                android:fontFamily="@font/poppins_medium"
+                android:hint="Email Mahasiswa"
                 android:inputType="text"
                 android:paddingStart="12dp"
                 android:paddingTop="12dp"
                 android:paddingEnd="12dp"
                 android:paddingBottom="12dp"
-                android:text="Email  Mahasiswa"
                 app:layout_constraintEnd_toEndOf="parent" />
 
             <EditText
@@ -166,12 +171,13 @@
                 android:layout_marginBottom="16dp"
                 android:background="@drawable/input_box"
                 android:ems="10"
+                android:fontFamily="@font/poppins_medium"
+                android:hint="Alamat Mahasiswa"
                 android:inputType="text"
                 android:paddingStart="12dp"
                 android:paddingTop="12dp"
                 android:paddingEnd="12dp"
                 android:paddingBottom="12dp"
-                android:text="Alamat Mahasiswa"
                 app:layout_constraintEnd_toEndOf="parent" />
 
             <EditText
@@ -184,12 +190,13 @@
                 android:layout_marginBottom="0dp"
                 android:background="@drawable/input_box"
                 android:ems="10"
+                android:fontFamily="@font/poppins_medium"
+                android:hint="No Telp Mahasiswa"
                 android:inputType="text"
                 android:paddingStart="12dp"
                 android:paddingTop="12dp"
                 android:paddingEnd="12dp"
                 android:paddingBottom="12dp"
-                android:text="No Telp Mahasiswa"
                 app:layout_constraintEnd_toEndOf="parent" />
 
         </LinearLayout>

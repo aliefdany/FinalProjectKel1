@@ -103,6 +103,8 @@ public class EditStudent extends AppCompatActivity implements ValueEventListener
             );
 
             this.appDb.child(this.etNIM.getText().toString()).setValue(mahasiswa);
+
+            finish();
         }
     }
 }
