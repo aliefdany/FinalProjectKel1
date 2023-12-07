@@ -1,7 +1,6 @@
 package ad.mobile.finalprojectkel1;
 
 public class Mahasiswa {
-    private String id;
     private String name;
     private String NIM;
     private String prodi;
@@ -10,15 +9,13 @@ public class Mahasiswa {
     private String alamat;
     private String phoneNumber;
 
-    public Mahasiswa(String id,
-                     String name,
+    public Mahasiswa(String name,
                      String NIM,
                      String prodi,
                      String fakultas,
                      String alamat,
                      String email,
                      String phoneNumber) {
-        this.id = id;
         this.name = name;
         this.NIM = NIM;
         this.prodi = prodi;
@@ -26,14 +23,6 @@ public class Mahasiswa {
         this.alamat = alamat;
         this.email = email;
         this.phoneNumber = phoneNumber;
-    }
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
     }
 
     public String getName() {

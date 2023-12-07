@@ -2,8 +2,7 @@ package ad.mobile.finalprojectkel1;
 
 import android.app.Dialog;
 import android.content.Context;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
+import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -76,8 +75,8 @@ public class MahasiswaAdapter extends RecyclerView.Adapter<MahasiswaAdapter.Item
 
         Mahasiswa k = this.data.get(position);
 
-        holder.tvUsername.setText(k.getName());
-        holder.tvKonten.setText(k.getNIM());
+        holder.tvNamaMahasiswa.setText(k.getName());
+        holder.tvNIM.setText(k.getNIM());
     }
 
     @Override
@@ -95,23 +94,25 @@ public class MahasiswaAdapter extends RecyclerView.Adapter<MahasiswaAdapter.Item
         this.dataOriginal = data;
     }
 
-    class ItemVH extends RecyclerView.ViewHolder {
+    class ItemVH extends RecyclerView.ViewHolder implements View.OnClickListener {
 
-        private TextView tvUsername;
-        private TextView tvKonten;
+        private TextView tvNamaMahasiswa;
+        private TextView tvNIM;
 
-        private ImageButton btDeleteTweet;
+        private ImageButton btDeleteMahasiswa;
 
 
         public ItemVH(@NonNull View itemView) {
             super(itemView);
 
-            this.tvUsername = (TextView) itemView.findViewById(R.id.tvNamaMahasiswa);
-            this.tvKonten = (TextView) itemView.findViewById(R.id.tvNIM);
-            this.btDeleteTweet = (ImageButton) itemView.findViewById(R.id.btDeleteMahasiswa);
+            this.tvNamaMahasiswa = (TextView) itemView.findViewById(R.id.tvNamaMahasiswa);
+            this.tvNIM = (TextView) itemView.findViewById(R.id.tvNIM);
+            this.btDeleteMahasiswa = (ImageButton) itemView.findViewById(R.id.btDeleteMahasiswa);
 
 
-            btDeleteTweet.setOnClickListener(new View.OnClickListener() {
+            itemView.setOnClickListener(this);
+
+            btDeleteMahasiswa.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     showDeleteDialog();
@@ -154,5 +155,11 @@ public class MahasiswaAdapter extends RecyclerView.Adapter<MahasiswaAdapter.Item
             notifyItemRangeChanged(position, data.size());
         }
 
+        @Override
+        public void onClick(View v) {
+            Intent i = new Intent(context, EditStudent.class);
+            i.putExtra("id", this.tvNIM.getText());
+            context.startActivity(i);
+        }
     }
 }

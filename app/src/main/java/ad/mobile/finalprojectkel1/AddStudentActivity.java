@@ -3,16 +3,12 @@ package ad.mobile.finalprojectkel1;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-
-import java.util.UUID;
 
 public class AddStudentActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -56,10 +52,8 @@ public class AddStudentActivity extends AppCompatActivity implements View.OnClic
     @Override
     public void onClick(View v) {
         if(v.getId() == R.id.btAddMhs){
-            String uuid = UUID.randomUUID().toString();
 
             Mahasiswa mahasiswa = new Mahasiswa(
-                    uuid,
                     this.etNamaMahasiswa.getText().toString(),
                     this.etNIM.getText().toString(),
                     this.etProdi.getText().toString(),
@@ -69,7 +63,7 @@ public class AddStudentActivity extends AppCompatActivity implements View.OnClic
                     this.etPhone.getText().toString()
             );
 
-            this.appDb.child(uuid).setValue(mahasiswa);
+            this.appDb.child(this.etNIM.getText().toString()).setValue(mahasiswa);
         }
     }
 }

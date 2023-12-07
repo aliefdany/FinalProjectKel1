@@ -71,7 +71,7 @@ public class HomeFragment extends Fragment implements ValueEventListener {
 //            Log.d("TAG", "Value is: " + map);
 
 
-            listMahasiswa.add(new Mahasiswa(map.get("id").toString(),
+            listMahasiswa.add(new Mahasiswa(
                     map.get("name").toString(),
                     map.get("nim").toString(),
                     map.get("prodi").toString(),
