@@ -1,6 +1,7 @@
 {
   "project_info": {
     "project_number": "672256184296",
+    "firebase_url": "https://final-project-papb-de61c-default-rtdb.asia-southeast1.firebasedatabase.app",
     "project_id": "final-project-papb-de61c",
     "storage_bucket": "final-project-papb-de61c.appspot.com"
   },
@@ -12,7 +13,20 @@
           "package_name": "ad.mobile.finalprojectkel1"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "672256184296-36tmn8qsioagbb3ssqp6jk6u4edtnrdc.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "ad.mobile.finalprojectkel1",
+            "certificate_hash": "f13e7d1c4fb2216cbbda709a83e135b1489f1269"
+          }
+        },
+        {
+          "client_id": "672256184296-32nqjefic1374i3oan6pt6j9muabi4kv.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyATAQyINFkxAuRvpHp_WzhZlxZOZRrQE5k"
@@ -20,7 +34,12 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "672256184296-32nqjefic1374i3oan6pt6j9muabi4kv.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         }
       }
     }
