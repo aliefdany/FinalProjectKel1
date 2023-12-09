@@ -37,6 +37,10 @@ import com.google.firebase.auth.GoogleAuthProvider;
 
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
 
+    private static final int REQ_ONE_TAP = 2;  // Can be any integer unique to the Activity.
+    private boolean showOneTapUI = true;
+
+
     private FirebaseAuth mAuth;
     private TextView loginTextButton;
     private EditText etEmail;
@@ -97,9 +101,11 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                                                     // Sign in success, update UI with the signed-in user's information
                                                     Log.d("TAG", "signInWithCredential:success");
                                                     FirebaseUser user = mAuth.getCurrentUser();
+                                                    updateUI(user);
                                                 } else {
                                                     // If sign in fails, display a message to the user.
                                                     Log.w("TAG", "signInWithCredential:failure", task.getException());
+                                                    updateUI(null);
                                                 }
                                             }
                                         });
@@ -167,6 +173,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     }
 
     public void updateUI(FirebaseUser account){
+        Log.d("TAG", "update ui executed");
         if(account != null){
             Toast.makeText(this,"You Signed In successfully",Toast.LENGTH_LONG).show();
             startActivity(new Intent(this,MainActivity.class));
