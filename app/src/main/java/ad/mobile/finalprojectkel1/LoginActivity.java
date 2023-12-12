@@ -53,8 +53,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private BeginSignInRequest signInRequest;
 
     private ActivityResultLauncher<IntentSenderRequest> launcher;
-
-
+    private View backdropLoading;
 
 
     @Override
@@ -70,6 +69,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
         this.btGoogle = findViewById(R.id.btGoogleLogin);
         this.btGoogle.setOnClickListener(this);
+
+        this.backdropLoading = findViewById(R.id.loadingPanel);
 
 
 
@@ -123,6 +124,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     @Override
     public void onClick(View v) {
         if(v.getId() == R.id.btDaftar) {
+            this.backdropLoading.setVisibility(View.VISIBLE);
             mAuth.signInWithEmailAndPassword(this.etEmail.getText().toString(), this.etPassword.getText().toString())
                     .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                         @Override
@@ -132,17 +134,19 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                                 Log.d("TAG", "signInWithEmail:success");
                                 FirebaseUser user = mAuth.getCurrentUser();
                                 updateUI(user);
+                                backdropLoading.setVisibility(View.GONE);
                             } else {
                                 // If sign in fails, display a message to the user.
                                 Log.w("TAG", "signInWithEmail:failure", task.getException());
                                 Toast.makeText(LoginActivity.this, "Authentication failed.",
                                         Toast.LENGTH_SHORT).show();
                                 updateUI(null);
+                                backdropLoading.setVisibility(View.GONE);
                             }
                         }
                     });
         } else if (v.getId() == R.id.btGoogleLogin) {
-            Log.d("Whatt", "hello");
+            this.backdropLoading.setVisibility(View.VISIBLE);
             oneTapClient = Identity.getSignInClient(LoginActivity.this);
             signInRequest = BeginSignInRequest.builder()
                     .setGoogleIdTokenRequestOptions(BeginSignInRequest.GoogleIdTokenRequestOptions.builder()
@@ -159,6 +163,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                         @Override
                         public void onSuccess(BeginSignInResult result) {
                             launcher.launch(new IntentSenderRequest.Builder(result.getPendingIntent().getIntentSender()).build());
+                            backdropLoading.setVisibility(View.GONE);
                         }
                     })
                     .addOnFailureListener(LoginActivity.this, new OnFailureListener() {
@@ -166,6 +171,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                         public void onFailure(@NonNull Exception e) {
                             // No Google Accounts found. Just continue presenting the signed-out UI.
                             Log.d("TAG", e.getLocalizedMessage());
+                            backdropLoading.setVisibility(View.GONE);
                         }
                     });
         }

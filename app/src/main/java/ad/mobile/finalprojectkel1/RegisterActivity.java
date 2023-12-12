@@ -13,6 +13,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -50,6 +51,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
 
     private SignInClient oneTapClient;
     private BeginSignInRequest signInRequest;
+    private View backdropLoading;
 
 
     @Override
@@ -67,6 +69,8 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
 
         this.btGoogle = findViewById(R.id.btGoogleRegister);
         this.btGoogle.setOnClickListener(this);
+
+        this.backdropLoading = findViewById(R.id.loadingPanel);
 
 
         Context ctx = this;
@@ -135,16 +139,19 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                                 // Sign in success, update UI with the signed-in user's information
                                 Log.d("TAG", "createUserWithEmail:success");
                                 FirebaseUser user = mAuth.getCurrentUser();
-//                            updateUI(user);
+                            updateUI(user);
+                            backdropLoading.setVisibility(View.GONE);
                             } else {
                                 // If sign in fails, display a message to the user.
                                 Log.w("TAG", "createUserWithEmail:failure", task.getException());
                                 Toast.makeText(RegisterActivity.this, "Authentication failed.",
                                         Toast.LENGTH_SHORT).show();
-//                            updateUI(null);
+                            updateUI(null);
                             }
                         }
                     });
+
+            this.backdropLoading.setVisibility(View.VISIBLE);
         } else if(v.getId() == R.id.btGoogleRegister) {
             Log.d("Whatt", "hello");
             oneTapClient = Identity.getSignInClient(RegisterActivity.this);
@@ -163,6 +170,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                         @Override
                         public void onSuccess(BeginSignInResult result) {
                             launcher.launch(new IntentSenderRequest.Builder(result.getPendingIntent().getIntentSender()).build());
+                            backdropLoading.setVisibility(View.GONE);
                         }
                     })
                     .addOnFailureListener(RegisterActivity.this, new OnFailureListener() {
@@ -170,8 +178,13 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                         public void onFailure(@NonNull Exception e) {
                             // No Google Accounts found. Just continue presenting the signed-out UI.
                             Log.d("TAG", e.getLocalizedMessage());
+                            backdropLoading.setVisibility(View.GONE);
                         }
                     });
+
+            this.backdropLoading.setVisibility(View.VISIBLE);
+
+
         }
 
 
