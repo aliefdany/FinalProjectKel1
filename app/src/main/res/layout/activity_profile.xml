@@ -321,18 +321,12 @@
                             android:textColor="#FFFFFF"
                             android:textSize="10sp" />
 
-                        <EditText
-                            android:id="@+id/etGender"
+                        <Spinner
+                            android:id="@+id/spGender"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:background="@null"
-                            android:ems="10"
-                            android:fontFamily="@font/poppins_medium"
-                            android:hint="Gender anda"
-                            android:inputType="text"
-                            android:textColor="#FFFEFE"
-                            android:textColorHint="#878787"
-                            android:textSize="14sp" />
+                            android:spinnerMode="dialog" />
                     </LinearLayout>
                 </androidx.constraintlayout.widget.ConstraintLayout>
 

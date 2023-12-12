@@ -11,14 +11,16 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserProfileChangeRequest;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -29,7 +31,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.Map;
 
-public class ProfileActivity extends AppCompatActivity implements View.OnClickListener {
+public class ProfileActivity extends AppCompatActivity implements View.OnClickListener, AdapterView.OnItemSelectedListener {
 
     private FirebaseAuth mAuth;
     private Button btLogout;
@@ -38,7 +40,7 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
 
     private TextView etNIDN;
     private TextView etPhone;
-    private TextView etGender;
+    private Spinner spGender;
     private TextView etDate;
 
     private TextView etDisplayName;
@@ -99,7 +101,7 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
 
                     etNIDN.setText(user.getNIDN());
                     etPhone.setText(user.getPhone());
-                    etGender.setText(user.getGender());
+                    spGender.setSelection(Integer.parseInt(user.getGender()));
                     etDate.setText(user.getBirthDate());
                     etDisplayName.setText(mAuth.getCurrentUser().getDisplayName());
 
@@ -116,7 +118,20 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
 
         this.etNIDN = findViewById(R.id.etNIDN);
         this.etPhone = findViewById(R.id.etNomorTeleponUser);
-        this.etGender = findViewById(R.id.etGender);
+        this.spGender = findViewById(R.id.spGender);
+
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(
+                this,
+                R.array.gender_array,
+                R.layout.spinner_item
+        );
+
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+// Apply the adapter to the spinner.
+        spGender.setAdapter(adapter);
+
+        spGender.setOnItemSelectedListener(this);
+
         this.etDate = findViewById(R.id.etDate);
         this.etDisplayName = findViewById(R.id.etUsername);
 
@@ -183,7 +198,6 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
                 backdropLoading.setVisibility(View.VISIBLE);
 
                 user.setEmail(tvEmail.getText().toString());
-                user.setGender(etGender.getText().toString());
                 user.setNIDN(etNIDN.getText().toString());
                 user.setPhone(etPhone.getText().toString());
                 user.setBirthDate(etDate.getText().toString());
@@ -223,6 +237,17 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
         } else if(v.getId() == R.id.btEditUser) {
             showEditDialog();
         }
+
+    }
+
+    @Override
+    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+            this.spGender.setSelection(position);
+            this.user.setGender(String.valueOf(position));
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> parent) {
 
     }
 }

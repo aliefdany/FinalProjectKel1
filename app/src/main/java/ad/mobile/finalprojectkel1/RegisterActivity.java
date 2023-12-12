@@ -136,7 +136,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                                                                 String id = UUID.randomUUID().toString();
 
                                                                 User dbUser = new User("",
-                                                                        "",
+                                                                        "0",
                                                                         "",
                                                                         "",
                                                                         user.getEmail(),
@@ -197,7 +197,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
 
                                 String id = UUID.randomUUID().toString();
 
-                                User dbUser = new User("","","","", user.getEmail(), id);
+                                User dbUser = new User("","0","","", user.getEmail(), id);
                                 appDb.child(id).setValue(dbUser);
 
                                 updateUI(user);

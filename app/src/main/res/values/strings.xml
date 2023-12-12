@@ -3,4 +3,10 @@
     <string name="header_view">Header view</string>
     <string name="profile_pic">Profile pic</string>
     <string name="default_web_client_id">672256184296-32nqjefic1374i3oan6pt6j9muabi4kv.apps.googleusercontent.com</string>
+
+    <string-array name="gender_array">
+        <item>Laki-laki</item>
+        <item>Perempuan</item>
+    </string-array>
+
 </resources>
