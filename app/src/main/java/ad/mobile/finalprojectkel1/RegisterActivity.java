@@ -104,6 +104,8 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                         try {
                             SignInCredential credential = oneTapClient.getSignInCredentialFromIntent(result.getData());
                             String idToken = credential.getGoogleIdToken();
+
+                            backdropLoading.setVisibility(View.VISIBLE);
                             if (idToken != null) {
                                 AuthCredential firebaseCredential = GoogleAuthProvider.getCredential(idToken, null);
                                 mAuth.signInWithCredential(firebaseCredential)
@@ -114,11 +116,20 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                                                     // Sign in success, update UI with the signed-in user's information
                                                     Log.d("TAG", "signInWithCredential:success");
                                                     FirebaseUser user = mAuth.getCurrentUser();
+
+                                                    String id = UUID.randomUUID().toString();
+
+                                                    User dbUser = new User("","","","", user.getEmail(), id);
+                                                    appDb.child(id).setValue(dbUser);
+
                                                     updateUI(user);
+
+                                                    backdropLoading.setVisibility(View.GONE);
                                                 } else {
                                                     // If sign in fails, display a message to the user.
                                                     Log.w("TAG", "signInWithCredential:failure", task.getException());
                                                     updateUI(null);
+                                                    backdropLoading.setVisibility(View.GONE);
                                                 }
                                             }
                                         });

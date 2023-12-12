@@ -43,6 +43,10 @@ public class HomeFragment extends Fragment implements ValueEventListener {
     private DatabaseReference db;
     private DatabaseReference appDb;
 
+    public HomeFragment() {
+        // doesn't do anything special
+    }
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,

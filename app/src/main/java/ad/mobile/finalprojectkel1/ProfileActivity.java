@@ -49,12 +49,15 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
 
     private User user;
     private TextView tvDisplayName;
+    private View backdropLoading;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
+
+        this.backdropLoading = findViewById(R.id.loadingPanel);
 
         this.btLogout = findViewById(R.id.btLogout);
         this.btLogout.setOnClickListener(this);
@@ -139,9 +142,13 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
         btConfirmLogout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                backdropLoading.setVisibility(View.VISIBLE);
+
                 mAuth.signOut();
 
                 dialog.dismiss();
+
+                backdropLoading.setVisibility(View.GONE);
 
                 Intent intent = new Intent(ProfileActivity.this, RegisterActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 
@@ -173,6 +180,8 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
         btConfirmUpdate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                backdropLoading.setVisibility(View.VISIBLE);
+
                 user.setEmail(tvEmail.getText().toString());
                 user.setGender(etGender.getText().toString());
                 user.setNIDN(etNIDN.getText().toString());
@@ -189,6 +198,7 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
                         .addOnCompleteListener(new OnCompleteListener<Void>() {
                             @Override
                             public void onComplete(@NonNull Task<Void> task) {
+                                backdropLoading.setVisibility(View.GONE);
                                 if (task.isSuccessful()) {
                                     tvDisplayName.setText(mAuth.getCurrentUser().getDisplayName());
                                     Log.d("TAG", "User profile updated.");

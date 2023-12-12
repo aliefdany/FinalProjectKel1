@@ -14,11 +14,13 @@ import androidx.fragment.app.Fragment;
 public class NavbarFragment extends Fragment implements View.OnClickListener {
 
     private INavbar activity;
-
     private View layout;
-
     private ImageButton btAddMhs;
     private ImageButton btAccount;
+
+    public NavbarFragment() {
+        // doesn't do anything special
+    }
 
 
     public NavbarFragment(INavbar activity){
