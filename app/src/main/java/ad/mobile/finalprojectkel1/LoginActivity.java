@@ -90,6 +90,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 result -> {
                     if (result.getResultCode() == RESULT_OK){
                         try {
+                            backdropLoading.setVisibility(View.VISIBLE);
                             SignInCredential credential = oneTapClient.getSignInCredentialFromIntent(result.getData());
                             String idToken = credential.getGoogleIdToken();
                             if (idToken != null) {
@@ -103,10 +104,14 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                                                     Log.d("TAG", "signInWithCredential:success");
                                                     FirebaseUser user = mAuth.getCurrentUser();
                                                     updateUI(user);
+
+                                                    backdropLoading.setVisibility(View.GONE);
                                                 } else {
                                                     // If sign in fails, display a message to the user.
                                                     Log.w("TAG", "signInWithCredential:failure", task.getException());
                                                     updateUI(null);
+
+                                                    backdropLoading.setVisibility(View.GONE);
                                                 }
                                             }
                                         });

@@ -32,9 +32,14 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 
+import java.util.Map;
 import java.util.UUID;
 
 public class RegisterActivity extends AppCompatActivity implements View.OnClickListener {
@@ -117,14 +122,41 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                                                     Log.d("TAG", "signInWithCredential:success");
                                                     FirebaseUser user = mAuth.getCurrentUser();
 
-                                                    String id = UUID.randomUUID().toString();
+                                                    Query query = FirebaseDatabase.getInstance(url)
+                                                            .getReference()
+                                                            .child("user")
+                                                            .orderByChild("email")
+                                                            .equalTo(user.getEmail())
+                                                            .limitToFirst(1);
 
-                                                    User dbUser = new User("","","","", user.getEmail(), id);
-                                                    appDb.child(id).setValue(dbUser);
+                                                    query.addValueEventListener(new ValueEventListener() {
+                                                        @Override
+                                                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                                            if(!snapshot.hasChildren()) {
+                                                                String id = UUID.randomUUID().toString();
 
-                                                    updateUI(user);
+                                                                User dbUser = new User("",
+                                                                        "",
+                                                                        "",
+                                                                        "",
+                                                                        user.getEmail(),
+                                                                        id);
+                                                                appDb.child(id).setValue(dbUser);
+                                                            }
 
-                                                    backdropLoading.setVisibility(View.GONE);
+                                                            updateUI(user);
+                                                            backdropLoading.setVisibility(View.GONE);
+                                                        }
+
+                                                        @Override
+                                                        public void onCancelled(@NonNull DatabaseError error) {
+                                                            // Getting Post failed, log a message
+                                                            Log.w("TAG", "loadPost:onCancelled", error.toException());
+                                                            // ...
+                                                        }
+                                                    });
+
+
                                                 } else {
                                                     // If sign in fails, display a message to the user.
                                                     Log.w("TAG", "signInWithCredential:failure", task.getException());
