@@ -32,6 +32,10 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
+import java.util.UUID;
 
 public class RegisterActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -53,6 +57,10 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     private BeginSignInRequest signInRequest;
     private View backdropLoading;
 
+    private String url = "https://final-project-papb-de61c-default-rtdb.asia-southeast1.firebasedatabase.app/";
+    private DatabaseReference db;
+    private DatabaseReference appDb;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,6 +79,10 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         this.btGoogle.setOnClickListener(this);
 
         this.backdropLoading = findViewById(R.id.loadingPanel);
+
+        this.db = FirebaseDatabase.getInstance(url).getReference();
+
+        this.appDb = this.db.child("user");
 
 
         Context ctx = this;
@@ -139,14 +151,21 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                                 // Sign in success, update UI with the signed-in user's information
                                 Log.d("TAG", "createUserWithEmail:success");
                                 FirebaseUser user = mAuth.getCurrentUser();
-                            updateUI(user);
-                            backdropLoading.setVisibility(View.GONE);
+
+                                String id = UUID.randomUUID().toString();
+
+                                User dbUser = new User("","","","", user.getEmail(), id);
+                                appDb.child(id).setValue(dbUser);
+
+                                updateUI(user);
+                                backdropLoading.setVisibility(View.GONE);
                             } else {
                                 // If sign in fails, display a message to the user.
                                 Log.w("TAG", "createUserWithEmail:failure", task.getException());
                                 Toast.makeText(RegisterActivity.this, "Authentication failed.",
                                         Toast.LENGTH_SHORT).show();
-                            updateUI(null);
+                                updateUI(null);
+                                backdropLoading.setVisibility(View.GONE);
                             }
                         }
                     });

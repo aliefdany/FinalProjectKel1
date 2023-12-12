@@ -32,7 +32,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/textView"
+            android:id="@+id/tvEmailUser"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/poppins_light"
@@ -79,276 +79,324 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/constraintLayout2">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/fromGroupNIDN"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
-            app:layout_constraintBottom_toTopOf="@+id/fromGroupPhone"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.473"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.5">
-
-            <ImageView
-                android:id="@+id/nidnIcon"
-                android:layout_width="22dp"
-                android:layout_height="0dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/nidn_icon" />
-
-            <View
-                android:id="@+id/dividerNIDN"
-                android:layout_width="340dp"
-                android:layout_height="1dp"
-                android:layout_marginEnd="4dp"
-                android:background="#FFFFFF"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/groupNIDN" />
-
-            <LinearLayout
-                android:id="@+id/groupNIDN"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:orientation="vertical"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/nidnIcon"
-                app:layout_constraintTop_toTopOf="parent">
-
-                <TextView
-                    android:id="@+id/labelNIDN"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/poppins_light"
-                    android:text="NIDN"
-                    android:textColor="#FFFFFF"
-                    android:textSize="10sp" />
-
-                <EditText
-                    android:id="@+id/etNIDN"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@null"
-                    android:ems="10"
-                    android:fontFamily="@font/poppins_medium"
-                    android:hint="NIDN anda"
-                    android:inputType="text"
-                    android:textColor="#FFFEFE"
-                    android:textColorHint="#878787"
-                    android:textSize="14sp" />
-            </LinearLayout>
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/fromGroupPhone"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="24dp"
-            android:layout_marginEnd="8dp"
-            app:layout_constraintBottom_toTopOf="@+id/fromGroupGender"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.473"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/fromGroupNIDN"
-            app:layout_constraintVertical_bias="0.5">
-
-            <ImageView
-                android:id="@+id/phoneIcon"
-                android:layout_width="22dp"
-                android:layout_height="0dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/phone_icon" />
-
-            <View
-                android:id="@+id/dividerPhone"
-                android:layout_width="340dp"
-                android:layout_height="1dp"
-                android:layout_marginEnd="4dp"
-                android:background="#FFFFFF"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/groupPhone" />
-
-            <LinearLayout
-                android:id="@+id/groupPhone"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:orientation="vertical"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/phoneIcon"
-                app:layout_constraintTop_toTopOf="parent">
-
-                <TextView
-                    android:id="@+id/phoneLabel"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/poppins_light"
-                    android:text="Nomor Telepon"
-                    android:textColor="#FFFFFF"
-                    android:textSize="10sp" />
-
-                <EditText
-                    android:id="@+id/etNomorTeleponUser"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@null"
-                    android:ems="10"
-                    android:fontFamily="@font/poppins_medium"
-                    android:hint="Nomor telepon anda"
-                    android:inputType="text"
-                    android:textColor="#FFFEFE"
-                    android:textColorHint="#878787"
-                    android:textSize="14sp" />
-            </LinearLayout>
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/fromGroupGender"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="24dp"
-            android:layout_marginEnd="8dp"
-            app:layout_constraintBottom_toTopOf="@+id/fromGroupDate"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.473"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/fromGroupPhone"
-            app:layout_constraintVertical_bias="0.5">
-
-            <ImageView
-                android:id="@+id/genderIcon"
-                android:layout_width="22dp"
-                android:layout_height="0dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/gender_icon" />
-
-            <View
-                android:id="@+id/dividerGender"
-                android:layout_width="340dp"
-                android:layout_height="1dp"
-                android:layout_marginEnd="4dp"
-                android:background="#FFFFFF"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/groupGender" />
-
-            <LinearLayout
-                android:id="@+id/groupGender"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:orientation="vertical"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/genderIcon"
-                app:layout_constraintTop_toTopOf="parent">
-
-                <TextView
-                    android:id="@+id/genderLabel"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/poppins_light"
-                    android:text="Gender"
-                    android:textColor="#FFFFFF"
-                    android:textSize="10sp" />
-
-                <EditText
-                    android:id="@+id/etGender"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@null"
-                    android:ems="10"
-                    android:fontFamily="@font/poppins_medium"
-                    android:hint="Gender anda"
-                    android:inputType="text"
-                    android:textColor="#FFFEFE"
-                    android:textColorHint="#878787"
-                    android:textSize="14sp" />
-            </LinearLayout>
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/fromGroupDate"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="24dp"
-            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="8dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.473"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/fromGroupGender"
-            app:layout_constraintVertical_bias="0.5">
-
-            <ImageView
-                android:id="@+id/dateIcon"
-                android:layout_width="22dp"
-                android:layout_height="0dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/date_icon" />
-
-            <View
-                android:id="@+id/dividerDate"
-                android:layout_width="340dp"
-                android:layout_height="1dp"
-                android:layout_marginEnd="4dp"
-                android:background="#FFFFFF"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/groupDate" />
+            app:layout_constraintTop_toTopOf="parent">
 
             <LinearLayout
-                android:id="@+id/groupDate"
-                android:layout_width="0dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:orientation="vertical"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/dateIcon"
-                app:layout_constraintTop_toTopOf="parent">
+                android:orientation="vertical">
 
-                <TextView
-                    android:id="@+id/dateLabel"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/poppins_light"
-                    android:text="Tanggal Lahir"
-                    android:textColor="#FFFFFF"
-                    android:textSize="10sp" />
-
-                <EditText
-                    android:id="@+id/etDate"
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/fromGroupUsername"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@null"
-                    android:ems="10"
-                    android:fontFamily="@font/poppins_medium"
-                    android:hint="Tanggal lahir anda"
-                    android:inputType="text"
-                    android:textColor="#FFFEFE"
-                    android:textColorHint="#878787"
-                    android:textSize="14sp" />
+                    android:layout_marginBottom="32dp">
+
+                    <ImageView
+                        android:id="@+id/usernameIcon"
+                        android:layout_width="22dp"
+                        android:layout_height="0dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:srcCompat="@drawable/nidn_icon" />
+
+                    <View
+                        android:id="@+id/dividerUsername"
+                        android:layout_width="340dp"
+                        android:layout_height="1dp"
+                        android:layout_marginEnd="4dp"
+                        android:background="#FFFFFF"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/groupUsername" />
+
+                    <LinearLayout
+                        android:id="@+id/groupUsername"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:orientation="vertical"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/usernameIcon"
+                        app:layout_constraintTop_toTopOf="parent">
+
+                        <TextView
+                            android:id="@+id/labelUsername"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/poppins_light"
+                            android:text="Username"
+                            android:textColor="#FFFFFF"
+                            android:textSize="10sp" />
+
+                        <EditText
+                            android:id="@+id/etUsername"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@null"
+                            android:ems="10"
+                            android:fontFamily="@font/poppins_medium"
+                            android:hint="Username anda"
+                            android:inputType="text"
+                            android:textColor="#FFFEFE"
+                            android:textColorHint="#878787"
+                            android:textSize="14sp" />
+                    </LinearLayout>
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/fromGroupPhone"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="32dp">
+
+                    <ImageView
+                        android:id="@+id/phoneIcon"
+                        android:layout_width="22dp"
+                        android:layout_height="0dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:srcCompat="@drawable/phone_icon" />
+
+                    <View
+                        android:id="@+id/dividerPhone"
+                        android:layout_width="340dp"
+                        android:layout_height="1dp"
+                        android:layout_marginEnd="4dp"
+                        android:background="#FFFFFF"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/groupPhone" />
+
+                    <LinearLayout
+                        android:id="@+id/groupPhone"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:orientation="vertical"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/phoneIcon"
+                        app:layout_constraintTop_toTopOf="parent">
+
+                        <TextView
+                            android:id="@+id/phoneLabel"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/poppins_light"
+                            android:text="Nomor Telepon"
+                            android:textColor="#FFFFFF"
+                            android:textSize="10sp" />
+
+                        <EditText
+                            android:id="@+id/etNomorTeleponUser"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@null"
+                            android:ems="10"
+                            android:fontFamily="@font/poppins_medium"
+                            android:hint="Nomor telepon anda"
+                            android:inputType="text"
+                            android:textColor="#FFFEFE"
+                            android:textColorHint="#878787"
+                            android:textSize="14sp" />
+                    </LinearLayout>
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/fromGroupNIDN"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="32dp">
+
+                    <ImageView
+                        android:id="@+id/nidnIcon"
+                        android:layout_width="22dp"
+                        android:layout_height="0dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:srcCompat="@drawable/nidn_icon" />
+
+                    <View
+                        android:id="@+id/dividerNIDN"
+                        android:layout_width="340dp"
+                        android:layout_height="1dp"
+                        android:layout_marginEnd="4dp"
+                        android:background="#FFFFFF"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/groupNIDN" />
+
+                    <LinearLayout
+                        android:id="@+id/groupNIDN"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:orientation="vertical"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/nidnIcon"
+                        app:layout_constraintTop_toTopOf="parent">
+
+                        <TextView
+                            android:id="@+id/labelNIDN"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/poppins_light"
+                            android:text="NIDN"
+                            android:textColor="#FFFFFF"
+                            android:textSize="10sp" />
+
+                        <EditText
+                            android:id="@+id/etNIDN"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@null"
+                            android:ems="10"
+                            android:fontFamily="@font/poppins_medium"
+                            android:hint="NIDN anda"
+                            android:inputType="text"
+                            android:textColor="#FFFEFE"
+                            android:textColorHint="#878787"
+                            android:textSize="14sp" />
+                    </LinearLayout>
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/fromGroupGender"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="32dp">
+
+                    <ImageView
+                        android:id="@+id/genderIcon"
+                        android:layout_width="22dp"
+                        android:layout_height="0dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:srcCompat="@drawable/gender_icon" />
+
+                    <View
+                        android:id="@+id/dividerGender"
+                        android:layout_width="340dp"
+                        android:layout_height="1dp"
+                        android:layout_marginEnd="4dp"
+                        android:background="#FFFFFF"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/groupGender" />
+
+                    <LinearLayout
+                        android:id="@+id/groupGender"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:orientation="vertical"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/genderIcon"
+                        app:layout_constraintTop_toTopOf="parent">
+
+                        <TextView
+                            android:id="@+id/genderLabel"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/poppins_light"
+                            android:text="Gender"
+                            android:textColor="#FFFFFF"
+                            android:textSize="10sp" />
+
+                        <EditText
+                            android:id="@+id/etGender"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@null"
+                            android:ems="10"
+                            android:fontFamily="@font/poppins_medium"
+                            android:hint="Gender anda"
+                            android:inputType="text"
+                            android:textColor="#FFFEFE"
+                            android:textColorHint="#878787"
+                            android:textSize="14sp" />
+                    </LinearLayout>
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/fromGroupDate"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:id="@+id/dateIcon"
+                        android:layout_width="22dp"
+                        android:layout_height="0dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:srcCompat="@drawable/date_icon" />
+
+                    <View
+                        android:id="@+id/dividerDate"
+                        android:layout_width="340dp"
+                        android:layout_height="1dp"
+                        android:layout_marginEnd="4dp"
+                        android:background="#FFFFFF"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/groupDate" />
+
+                    <LinearLayout
+                        android:id="@+id/groupDate"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:orientation="vertical"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/dateIcon"
+                        app:layout_constraintTop_toTopOf="parent">
+
+                        <TextView
+                            android:id="@+id/dateLabel"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/poppins_light"
+                            android:text="Tanggal Lahir"
+                            android:textColor="#FFFFFF"
+                            android:textSize="10sp" />
+
+                        <EditText
+                            android:id="@+id/etDate"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@null"
+                            android:ems="10"
+                            android:fontFamily="@font/poppins_medium"
+                            android:hint="Tanggal lahir anda"
+                            android:inputType="text"
+                            android:textColor="#FFFEFE"
+                            android:textColorHint="#878787"
+                            android:textSize="14sp" />
+                    </LinearLayout>
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
             </LinearLayout>
-        </androidx.constraintlayout.widget.ConstraintLayout>
+        </ScrollView>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
