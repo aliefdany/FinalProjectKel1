@@ -71,20 +71,20 @@ public class HomeFragment extends Fragment implements ValueEventListener {
         this.listMahasiswa = new ArrayList<>();
         // Iterate through the children and add them to the ArrayList
         for (DataSnapshot snap : snapshot.getChildren()) {
-            Map<Mahasiswa, Object> map = (Map<Mahasiswa, Object>) snap.getValue();
+//            Map<Mahasiswa, Object> map = (Map<Mahasiswa, Object>) snap.getValue();
 
 //            Log.d("TAG", "Value is: " + map);
 
 
-            listMahasiswa.add(new Mahasiswa(
-                    map.get("name").toString(),
-                    map.get("nim").toString(),
-                    map.get("prodi").toString(),
-                    map.get("fakultas").toString(),
-                    map.get("email").toString(),
-                    map.get("alamat").toString(),
-                    map.get("phoneNumber").toString(),
-                    snap.getRef()));
+//            listMahasiswa.add(new Mahasiswa(
+//                    map.get("name").toString(),
+//                    map.get("nim").toString(),
+//                    map.get("prodi").toString(),
+//                    map.get("fakultas").toString(),
+//                    map.get("email").toString(),
+//                    map.get("alamat").toString(),
+//                    map.get("phoneNumber").toString(),
+//                    snap.getRef()));
         }
 
         this.layout.findViewById(R.id.dbLoading).setVisibility(ProgressBar.GONE);

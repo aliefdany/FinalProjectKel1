@@ -18,6 +18,7 @@ public class NavbarFragment extends Fragment implements View.OnClickListener {
     private View layout;
 
     private ImageButton btAddMhs;
+    private ImageButton btAccount;
 
 
     public NavbarFragment(INavbar activity){
@@ -31,15 +32,23 @@ public class NavbarFragment extends Fragment implements View.OnClickListener {
         this.layout = inflater.inflate(R.layout.navigation_fragment, container, false);
 
         this.btAddMhs = this.layout.findViewById(R.id.btAdd);
+        this.btAccount = this.layout.findViewById(R.id.btAccount);
 
         this.btAddMhs.setOnClickListener(this);
+        this.btAccount.setOnClickListener(this);
 
         return this.layout;
     }
 
     @Override
     public void onClick(View view) {
-        Intent i = new Intent((Context) this.activity,AddStudentActivity.class);
-        startActivity(i);
+
+        if( view.getId() == R.id.btAdd) {
+            Intent i = new Intent((Context) this.activity,AddStudentActivity.class);
+            startActivity(i);
+        } else if(view.getId() == R.id.btAccount) {
+            Intent i = new Intent((Context) this.activity,ProfileActivity.class);
+            startActivity(i);
+        }
     }
 }
