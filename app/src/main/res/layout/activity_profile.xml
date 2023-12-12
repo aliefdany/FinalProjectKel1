@@ -47,7 +47,7 @@
 
 
     <Button
-        android:id="@+id/btEditUser"
+        android:id="@+id/btLogout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
@@ -73,7 +73,7 @@
         android:layout_marginEnd="24dp"
         android:layout_marginBottom="16dp"
         android:background="@drawable/rectangle_box"
-        app:layout_constraintBottom_toTopOf="@+id/btLogout"
+        app:layout_constraintBottom_toTopOf="@+id/btEditUser"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -353,7 +353,7 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <Button
-        android:id="@+id/btLogout"
+        android:id="@+id/btEditUser"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
@@ -365,7 +365,7 @@
         android:paddingBottom="12dp"
         android:text="Edit"
         android:textSize="16sp"
-        app:layout_constraintBottom_toTopOf="@+id/btEditUser"
+        app:layout_constraintBottom_toTopOf="@+id/btLogout"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
