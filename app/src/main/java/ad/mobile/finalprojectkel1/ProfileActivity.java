@@ -75,7 +75,6 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
         this.tvEmail.setText(this.mAuth.getCurrentUser().getEmail());
         this.tvDisplayName.setText(this.mAuth.getCurrentUser().getDisplayName());
 
-        Log.d("LOGGGGG", this.mAuth.getCurrentUser().getDisplayName());
 
         Query query = FirebaseDatabase.getInstance(url)
                 .getReference()
@@ -134,6 +133,14 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
 
         this.etDate = findViewById(R.id.etDate);
         this.etDisplayName = findViewById(R.id.etUsername);
+
+        this.etDate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                DatePickerFragment newFragment = new DatePickerFragment(etDate);
+                newFragment.show(ProfileActivity.this.getSupportFragmentManager(), "datePicker");
+            }
+        });
 
 
         this.db = FirebaseDatabase.getInstance(url).getReference();

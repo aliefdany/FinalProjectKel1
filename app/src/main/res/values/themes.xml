@@ -6,4 +6,20 @@
     </style>
 
     <style name="Theme.FinalProjectKel1" parent="Base.Theme.FinalProjectKel1" />
+
+
+    <style name="datepicker" parent="ThemeOverlay.MaterialComponents.MaterialCalendar">
+        <item name="colorPrimary">@color/rosewood</item>
+        <item name="colorPrimaryDark">@color/rosewood</item>
+        <item name="android:textColorPrimary">@color/rosewood</item>
+        <item name="android:textColor">@color/rosewood</item>
+        <item name="colorAccent">@color/auburn</item>
+        <item name="fontFamily">@font/poppins_medium</item>
+        <item name="buttonBarPositiveButtonStyle">@style/TextButton</item>
+    </style>
+
+    <style name="TextButton" parent="Widget.MaterialComponents.Button.TextButton.Dialog">
+        <item name="android:textColor">@color/auburn</item>
+        <item name="backgroundTint">@color/auburn</item>
+    </style>
 </resources>
