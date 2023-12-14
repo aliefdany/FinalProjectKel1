@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/bottomSheetContainer"
+    app:behavior_hideable="true"
+    app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior"
+    android:background="@drawable/bottom_sheet_back">
+
+    <View
+        android:layout_width="48dp"
+        android:layout_height="6dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/divider_back"
+        android:elevation="5dp" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="12dp"
+        android:fontFamily="@font/poppins_medium"
+        android:gravity="center|start"
+        android:text="Filter"
+        android:textColor="#000000"
+        android:textSize="18sp"
+        android:textStyle="bold" />
+<View
+android:layout_width="match_parent"
+    android:layout_height="0.01mm"
+    android:layout_marginTop="10dp"
+    android:background="@color/rosewood"
+    tools:ignore="InOrMmUsage" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="12dp"
+        android:fontFamily="@font/poppins_medium"
+        android:text="Berdasarkan Kelas" />
+
+    <com.google.android.material.chip.ChipGroup
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="12dp"
+        android:layout_marginBottom="24dp">
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/chipA"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:checkable="true"
+            android:fontFamily="@font/poppins_medium"
+            android:padding="12dp"
+            android:text="Kelas A"
+            android:textColor="@color/text_chip"
+            app:chipBackgroundColor="@color/chip"
+            app:chipCornerRadius="10dp"
+            app:chipMinTouchTargetSize="0dp"
+            app:chipStrokeColor="@color/rosewood"
+            app:chipStrokeWidth="2dp" />
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/chipB"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:checkable="true"
+            android:fontFamily="@font/poppins_medium"
+            android:padding="12dp"
+            android:text="Kelas B"
+            android:textColor="@color/text_chip"
+            app:chipBackgroundColor="@color/chip"
+            app:chipCornerRadius="10dp"
+            app:chipMinTouchTargetSize="0dp"
+            app:chipStrokeColor="@color/rosewood"
+            app:chipStrokeWidth="2dp" />
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/chipC"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:checkable="true"
+            android:fontFamily="@font/poppins_medium"
+            android:padding="12dp"
+            android:text="Kelas C"
+            android:textColor="@color/text_chip"
+            app:chipBackgroundColor="@color/chip"
+            app:chipCornerRadius="10dp"
+            app:chipMinTouchTargetSize="0dp"
+            app:chipStrokeColor="@color/rosewood"
+            app:chipStrokeWidth="2dp" />
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/chipD"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:checkable="true"
+            android:fontFamily="@font/poppins_medium"
+            android:padding="12dp"
+            android:text="Kelas D"
+            android:textColor="@color/text_chip"
+            app:chipBackgroundColor="@color/chip"
+            app:chipCornerRadius="10dp"
+            app:chipMinTouchTargetSize="0dp"
+            app:chipStrokeColor="@color/rosewood"
+            app:chipStrokeWidth="2dp" />
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/chipE"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:checkable="true"
+            android:fontFamily="@font/poppins_medium"
+            android:padding="12dp"
+            android:text="Kelas E"
+            android:textColor="@color/text_chip"
+            app:chipBackgroundColor="@color/chip"
+            app:chipCornerRadius="10dp"
+            app:chipMinTouchTargetSize="0dp"
+            app:chipStrokeColor="@color/rosewood"
+            app:chipStrokeWidth="2dp" />
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/chipF"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:checkable="true"
+            android:fontFamily="@font/poppins_medium"
+            android:padding="12dp"
+            android:text="Kelas F"
+            android:textColor="@color/text_chip"
+            app:chipBackgroundColor="@color/chip"
+            app:chipCornerRadius="10dp"
+            app:chipMinTouchTargetSize="0dp"
+            app:chipStrokeColor="@color/rosewood"
+            app:chipStrokeWidth="2dp" />
+
+    </com.google.android.material.chip.ChipGroup>
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
+        android:layout_marginEnd="12dp"
+        android:layout_marginBottom="12dp"
+        android:fontFamily="@font/poppins_medium"
+        android:paddingTop="12dp"
+        android:paddingBottom="12dp"
+        android:text="Terapkan" />
+
+</LinearLayout>

@@ -1,5 +1,6 @@
 package ad.mobile.finalprojectkel1;
 
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -9,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 
 import androidx.annotation.NonNull;
@@ -16,6 +18,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -26,7 +29,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-public class HomeFragment extends Fragment implements ValueEventListener {
+public class HomeFragment extends Fragment implements ValueEventListener, View.OnClickListener {
     private INavbar activity;
 
     private View layout;
@@ -37,14 +40,21 @@ public class HomeFragment extends Fragment implements ValueEventListener {
     private MahasiswaAdapter adapterMahasiswa;
     private EditText tvSearch;
 
+    private Button btOpenFilter;
+
+    private View filterOverlay;
+
     private ProgressBar dbLoading;
 
     private String url = "https://final-project-papb-de61c-default-rtdb.asia-southeast1.firebasedatabase.app/";
     private DatabaseReference db;
     private DatabaseReference appDb;
 
-    public HomeFragment() {
+    private BottomSheetDialog bottomSheetDialog;
+
+    public HomeFragment(View filterOverlay) {
         // doesn't do anything special
+        this.filterOverlay = filterOverlay;
     }
 
 
@@ -57,6 +67,21 @@ public class HomeFragment extends Fragment implements ValueEventListener {
 
         // Inflate the layout for this fragment
         this.layout = inflater.inflate(R.layout.home_fragment, container, false);
+
+
+        this.bottomSheetDialog = new BottomSheetDialog(
+                this.layout.getContext());
+        View bottomSheetView = LayoutInflater.from(this.layout.getContext())
+                .inflate(R.layout.bottom_sheet,
+                        (LinearLayout) this.layout.findViewById(R.id.bottomSheetContainer));
+        this.bottomSheetDialog.setContentView(bottomSheetView);
+        this.bottomSheetDialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
+            @Override
+            public void onCancel(DialogInterface dialog) {
+                filterOverlay.setVisibility(View.GONE);
+            }
+        });
+
 
         return this.layout;
     }
@@ -92,6 +117,8 @@ public class HomeFragment extends Fragment implements ValueEventListener {
         }
 
         this.layout.findViewById(R.id.dbLoading).setVisibility(ProgressBar.GONE);
+        this.btOpenFilter = this.layout.findViewById(R.id.btOpenFilter);
+        this.btOpenFilter.setOnClickListener(this);
 
         this.tvSearch = this.layout.findViewById(R.id.etSearch);
         this.tvSearch.addTextChangedListener(new TextWatcher() {
@@ -129,6 +156,16 @@ public class HomeFragment extends Fragment implements ValueEventListener {
 
     @Override
     public void onCancelled(@NonNull DatabaseError error) {
+
+    }
+
+    @Override
+    public void onClick(View v) {
+        //  opens filter dialog
+
+        this.bottomSheetDialog.show();
+
+        this.filterOverlay.setVisibility(View.VISIBLE);
 
     }
 }
