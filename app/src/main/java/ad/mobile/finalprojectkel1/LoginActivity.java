@@ -34,6 +34,14 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.UUID;
 
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -54,6 +62,10 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     private ActivityResultLauncher<IntentSenderRequest> launcher;
     private View backdropLoading;
+
+    private String url = "https://final-project-papb-de61c-default-rtdb.asia-southeast1.firebasedatabase.app/";
+    private DatabaseReference db;
+    private DatabaseReference appDb;
 
 
     @Override
@@ -85,6 +97,10 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
         mAuth = FirebaseAuth.getInstance();
 
+        this.db = FirebaseDatabase.getInstance(url).getReference();
+
+        this.appDb = this.db.child("user");
+
         this.launcher = registerForActivityResult(
                 new ActivityResultContracts.StartIntentSenderForResult(),
                 result -> {
@@ -95,14 +111,51 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                             String idToken = credential.getGoogleIdToken();
                             if (idToken != null) {
                                 AuthCredential firebaseCredential = GoogleAuthProvider.getCredential(idToken, null);
+
+
+
                                 mAuth.signInWithCredential(firebaseCredential)
                                         .addOnCompleteListener(LoginActivity.this, new OnCompleteListener<AuthResult>() {
                                             @Override
                                             public void onComplete(@NonNull Task<AuthResult> task) {
                                                 if (task.isSuccessful()) {
+
+                                                    FirebaseUser user = mAuth.getCurrentUser();
+
+                                                    Query query = appDb
+                                                            .orderByChild("email")
+                                                            .equalTo(user.getEmail())
+                                                            .limitToFirst(1);
+
+                                                    query.addValueEventListener(new ValueEventListener() {
+                                                        @Override
+                                                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                                            if(!snapshot.hasChildren()) {
+                                                                String id = UUID.randomUUID().toString();
+
+                                                                User dbUser = new User("",
+                                                                        "0",
+                                                                        "",
+                                                                        "",
+                                                                        user.getEmail(),
+                                                                        id);
+                                                                appDb.child(id).setValue(dbUser);
+                                                            }
+
+                                                            updateUI(user);
+                                                            backdropLoading.setVisibility(View.GONE);
+                                                        }
+
+                                                        @Override
+                                                        public void onCancelled(@NonNull DatabaseError error) {
+                                                            // Getting Post failed, log a message
+                                                            Log.w("TAG", "loadPost:onCancelled", error.toException());
+                                                            // ...
+                                                        }
+                                                    });
+
                                                     // Sign in success, update UI with the signed-in user's information
                                                     Log.d("TAG", "signInWithCredential:success");
-                                                    FirebaseUser user = mAuth.getCurrentUser();
                                                     updateUI(user);
 
                                                     backdropLoading.setVisibility(View.GONE);

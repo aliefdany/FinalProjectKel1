@@ -122,9 +122,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                                                     Log.d("TAG", "signInWithCredential:success");
                                                     FirebaseUser user = mAuth.getCurrentUser();
 
-                                                    Query query = FirebaseDatabase.getInstance(url)
-                                                            .getReference()
-                                                            .child("user")
+                                                    Query query = appDb
                                                             .orderByChild("email")
                                                             .equalTo(user.getEmail())
                                                             .limitToFirst(1);
