@@ -34,19 +34,6 @@
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/header_bg" />
 
-    <ImageView
-        android:id="@+id/ivHeaderContainer"
-        android:layout_width="72dp"
-        android:layout_height="72dp"
-        android:layout_marginStart="28dp"
-        android:contentDescription="@string/profile_pic"
-        app:layout_constraintBottom_toBottomOf="@+id/headerView"
-        app:layout_constraintEnd_toEndOf="@+id/headerView"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/headerView"
-        app:layout_constraintTop_toTopOf="@+id/headerView"
-        app:layout_constraintVertical_bias="0.459" />
-
     <TextView
         android:id="@+id/tvUserGreeting"
         android:layout_width="wrap_content"
@@ -57,8 +44,7 @@
         android:textColor="#FFFFFF"
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="@+id/headerView"
-        app:layout_constraintHorizontal_bias="0.096"
-        app:layout_constraintStart_toEndOf="@+id/ivHeaderContainer"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/headerView" />
 
     <TextView
@@ -71,23 +57,9 @@
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="@+id/headerView"
         app:layout_constraintEnd_toEndOf="@+id/headerView"
-        app:layout_constraintHorizontal_bias="0.109"
-        app:layout_constraintStart_toEndOf="@+id/ivHeaderContainer"
+        app:layout_constraintStart_toStartOf="@+id/headerView"
         app:layout_constraintTop_toBottomOf="@+id/tvUserGreeting"
         app:layout_constraintVertical_bias="0.054" />
-
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="36dp"
-        android:layout_height="36dp"
-        android:layout_marginEnd="28dp"
-        app:layout_constraintBottom_toBottomOf="@+id/headerView"
-        app:layout_constraintEnd_toEndOf="@+id/headerView"
-        app:layout_constraintHorizontal_bias="0.968"
-        app:layout_constraintStart_toEndOf="@+id/tvUserGreeting"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.316"
-        app:srcCompat="@drawable/setting_icon" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvMahasiswa"

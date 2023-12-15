@@ -13,6 +13,7 @@ import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -58,6 +59,8 @@ public class HomeFragment extends Fragment implements ValueEventListener, View.O
     private Chip chipIlkom;
 
     private Button btFilter;
+
+    private TextView tvUserGreeting;
 
     private String url = "https://final-project-papb-de61c-default-rtdb.asia-southeast1.firebasedatabase.app/";
     private DatabaseReference db;
