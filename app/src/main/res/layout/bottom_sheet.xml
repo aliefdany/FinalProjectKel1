@@ -45,7 +45,7 @@ android:layout_width="match_parent"
         android:layout_marginTop="10dp"
         android:layout_marginEnd="12dp"
         android:fontFamily="@font/poppins_medium"
-        android:text="Berdasarkan Kelas" />
+        android:text="Berdasarkan Prodi" />
 
     <com.google.android.material.chip.ChipGroup
         android:layout_width="match_parent"
@@ -56,13 +56,13 @@ android:layout_width="match_parent"
         android:layout_marginBottom="24dp">
 
         <com.google.android.material.chip.Chip
-            android:id="@+id/chipA"
+            android:id="@+id/chipSI"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:checkable="true"
             android:fontFamily="@font/poppins_medium"
             android:padding="12dp"
-            android:text="Kelas A"
+            android:text="Sistem Informasi"
             android:textColor="@color/text_chip"
             app:chipBackgroundColor="@color/chip"
             app:chipCornerRadius="10dp"
@@ -71,13 +71,13 @@ android:layout_width="match_parent"
             app:chipStrokeWidth="2dp" />
 
         <com.google.android.material.chip.Chip
-            android:id="@+id/chipB"
+            android:id="@+id/chipTI"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:checkable="true"
             android:fontFamily="@font/poppins_medium"
             android:padding="12dp"
-            android:text="Kelas B"
+            android:text="Teknologi Informasi"
             android:textColor="@color/text_chip"
             app:chipBackgroundColor="@color/chip"
             app:chipCornerRadius="10dp"
@@ -86,13 +86,13 @@ android:layout_width="match_parent"
             app:chipStrokeWidth="2dp" />
 
         <com.google.android.material.chip.Chip
-            android:id="@+id/chipC"
+            android:id="@+id/chipTIF"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:checkable="true"
             android:fontFamily="@font/poppins_medium"
             android:padding="12dp"
-            android:text="Kelas C"
+            android:text="Teknik Informatika"
             android:textColor="@color/text_chip"
             app:chipBackgroundColor="@color/chip"
             app:chipCornerRadius="10dp"
@@ -101,13 +101,13 @@ android:layout_width="match_parent"
             app:chipStrokeWidth="2dp" />
 
         <com.google.android.material.chip.Chip
-            android:id="@+id/chipD"
+            android:id="@+id/chipTekkom"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:checkable="true"
             android:fontFamily="@font/poppins_medium"
             android:padding="12dp"
-            android:text="Kelas D"
+            android:text="Teknik Komputer"
             android:textColor="@color/text_chip"
             app:chipBackgroundColor="@color/chip"
             app:chipCornerRadius="10dp"
@@ -116,13 +116,13 @@ android:layout_width="match_parent"
             app:chipStrokeWidth="2dp" />
 
         <com.google.android.material.chip.Chip
-            android:id="@+id/chipE"
+            android:id="@+id/chipPTI"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:checkable="true"
             android:fontFamily="@font/poppins_medium"
             android:padding="12dp"
-            android:text="Kelas E"
+            android:text="Pend. Teknologi Informasi"
             android:textColor="@color/text_chip"
             app:chipBackgroundColor="@color/chip"
             app:chipCornerRadius="10dp"
@@ -131,13 +131,13 @@ android:layout_width="match_parent"
             app:chipStrokeWidth="2dp" />
 
         <com.google.android.material.chip.Chip
-            android:id="@+id/chipF"
+            android:id="@+id/chipIlkom"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:checkable="true"
             android:fontFamily="@font/poppins_medium"
             android:padding="12dp"
-            android:text="Kelas F"
+            android:text="Ilmu Komputer"
             android:textColor="@color/text_chip"
             app:chipBackgroundColor="@color/chip"
             app:chipCornerRadius="10dp"
@@ -148,7 +148,7 @@ android:layout_width="match_parent"
     </com.google.android.material.chip.ChipGroup>
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/btFilter"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="12dp"
