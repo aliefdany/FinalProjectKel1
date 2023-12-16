@@ -8,6 +8,8 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
@@ -204,32 +206,44 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
             public void onClick(View view) {
                 backdropLoading.setVisibility(View.VISIBLE);
 
-                user.setEmail(tvEmail.getText().toString());
-                user.setNIDN(etNIDN.getText().toString());
-                user.setPhone(etPhone.getText().toString());
-                user.setBirthDate(etDate.getText().toString());
+                Handler h = new Handler(Looper.getMainLooper());
+                Thread editProfileThread = new Thread(() -> {
+                    try {
+                        user.setEmail(tvEmail.getText().toString());
+                        user.setNIDN(etNIDN.getText().toString());
+                        user.setPhone(etPhone.getText().toString());
+                        user.setBirthDate(etDate.getText().toString());
 
-                appDb.child(user.getId()).setValue(user);
+                        appDb.child(user.getId()).setValue(user);
 
-                UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
-                        .setDisplayName(etDisplayName.getText().toString())
-                        .build();
+                        UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
+                                .setDisplayName(etDisplayName.getText().toString())
+                                .build();
 
-                mAuth.getCurrentUser().updateProfile(profileUpdates)
-                        .addOnCompleteListener(new OnCompleteListener<Void>() {
-                            @Override
-                            public void onComplete(@NonNull Task<Void> task) {
-                                backdropLoading.setVisibility(View.GONE);
-                                if (task.isSuccessful()) {
-                                    tvDisplayName.setText(mAuth.getCurrentUser().getDisplayName());
-                                    Log.d("TAG", "User profile updated.");
-                                }
-                            }
-                        });
+                        mAuth.getCurrentUser().updateProfile(profileUpdates)
+                                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                    @Override
+                                    public void onComplete(@NonNull Task<Void> task) {
+                                        backdropLoading.setVisibility(View.GONE);
+                                        if (task.isSuccessful()) {
+                                            tvDisplayName.setText(mAuth.getCurrentUser().getDisplayName());
+                                            Log.d("TAG", "User profile updated.");
+                                        }
 
+
+                                        h.post(() -> {
+                                            Toast.makeText(ProfileActivity.this,"Sukses mengupdate data anda",Toast.LENGTH_LONG).show();
+                                        });
+                                    }
+                                });
+
+                    }catch(Exception e) {
+
+                    }
+                });
+
+                editProfileThread.start();
                 dialog.dismiss();
-
-                Toast.makeText(ProfileActivity.this,"Sukses mengupdate data anda",Toast.LENGTH_LONG).show();
             }
         });
 
@@ -238,13 +252,11 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
 
     @Override
     public void onClick(View v) {
-
         if(v.getId() == R.id.btLogout) {
             showLogoutDialog();
         } else if(v.getId() == R.id.btEditUser) {
             showEditDialog();
         }
-
     }
 
     @Override
