@@ -38,21 +38,30 @@ public class MahasiswaAdapter extends RecyclerView.Adapter<MahasiswaAdapter.Item
             @Override
             protected FilterResults performFiltering(CharSequence search) {
 
-                Log.d("Filter", search.toString());
-
-                String searchLower = search.toString().toLowerCase();
-
                 FilterResults results = new FilterResults();
-                ArrayList<Mahasiswa> filteredMahasiswa = new ArrayList<>();
 
-                for(Mahasiswa c: dataOriginal) {
-                    if (c.getName().toLowerCase().contains(searchLower) || c.getNIM().toLowerCase().contains(searchLower) || c.getProdi().matches(search.toString())) {
-                        filteredMahasiswa.add(c);
+                Thread filterThread = new Thread(() -> {
+                    try {
+                        String searchLower = search.toString().toLowerCase();
+
+
+                        ArrayList<Mahasiswa> filteredMahasiswa = new ArrayList<>();
+
+                        for(Mahasiswa c: dataOriginal) {
+                            if (c.getName().toLowerCase().contains(searchLower) || c.getNIM().toLowerCase().contains(searchLower) || c.getProdi().matches(search.toString())) {
+                                filteredMahasiswa.add(c);
+                            }
+                        }
+
+                        results.values = filteredMahasiswa;
+                        results.count = filteredMahasiswa.size();
+                    } catch(Exception e) {
+
                     }
-                }
+                });
 
-                results.values = filteredMahasiswa;
-                results.count = filteredMahasiswa.size();
+                filterThread.start();
+
                 return results;
             }
 
