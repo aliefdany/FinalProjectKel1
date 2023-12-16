@@ -4,6 +4,8 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
@@ -92,20 +94,31 @@ public class EditStudent extends AppCompatActivity implements ValueEventListener
     public void onClick(View v) {
         if(v.getId() == R.id.btEditMhs){
 
-            Mahasiswa mahasiswa = new Mahasiswa(
-                    this.etNamaMahasiswa.getText().toString(),
-                    this.etNIM.getText().toString(),
-                    this.etProdi.getText().toString(),
-                    this.etFakultas.getText().toString(),
-                    this.etEmail.getText().toString(),
-                    this.etAlamat.getText().toString(),
-                    this.etPhone.getText().toString(),
-                    null
-            );
+            Handler h = new Handler(Looper.getMainLooper());
+            Thread editMhsThread = new Thread(() -> {
+                try {
+                    Mahasiswa mahasiswa = new Mahasiswa(
+                            this.etNamaMahasiswa.getText().toString(),
+                            this.etNIM.getText().toString(),
+                            this.etProdi.getText().toString(),
+                            this.etFakultas.getText().toString(),
+                            this.etEmail.getText().toString(),
+                            this.etAlamat.getText().toString(),
+                            this.etPhone.getText().toString(),
+                            null
+                    );
 
-            this.appDb.child(this.etNIM.getText().toString()).setValue(mahasiswa);
+                    this.appDb.child(this.etNIM.getText().toString()).setValue(mahasiswa);
 
-            finish();
+                    h.post(() -> {
+                        finish();
+                    });
+                } catch(Exception e) {
+
+                }
+            });
+
+            editMhsThread.start();
         }
     }
 }
