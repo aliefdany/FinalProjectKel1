@@ -12,6 +12,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentSender;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -66,6 +68,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private String url = "https://final-project-papb-de61c-default-rtdb.asia-southeast1.firebasedatabase.app/";
     private DatabaseReference db;
     private DatabaseReference appDb;
+
 
 
     @Override
@@ -183,55 +186,83 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     public void onClick(View v) {
         if(v.getId() == R.id.btDaftar) {
             this.backdropLoading.setVisibility(View.VISIBLE);
-            mAuth.signInWithEmailAndPassword(this.etEmail.getText().toString(), this.etPassword.getText().toString())
-                    .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                        @Override
-                        public void onComplete(@NonNull Task<AuthResult> task) {
-                            if (task.isSuccessful()) {
-                                // Sign in success, update UI with the signed-in user's information
-                                Log.d("TAG", "signInWithEmail:success");
-                                FirebaseUser user = mAuth.getCurrentUser();
-                                updateUI(user);
-                                backdropLoading.setVisibility(View.GONE);
-                            } else {
-                                // If sign in fails, display a message to the user.
-                                Log.w("TAG", "signInWithEmail:failure", task.getException());
-                                Toast.makeText(LoginActivity.this, "Authentication failed.",
-                                        Toast.LENGTH_SHORT).show();
-                                updateUI(null);
-                                backdropLoading.setVisibility(View.GONE);
-                            }
-                        }
-                    });
+
+            Handler h = new Handler(Looper.getMainLooper());
+            Thread signupThread = new Thread(() -> {
+                try {
+                    mAuth.signInWithEmailAndPassword(this.etEmail.getText().toString(), this.etPassword.getText().toString())
+                            .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                                @Override
+                                public void onComplete(@NonNull Task<AuthResult> task) {
+                                    if (task.isSuccessful()) {
+                                        // Sign in success, update UI with the signed-in user's information
+                                        Log.d("TAG", "signInWithEmail:success");
+                                        FirebaseUser user = mAuth.getCurrentUser();
+                                        updateUI(user);
+                                    } else {
+                                        // If sign in fails, display a message to the user.
+                                        Log.w("TAG", "signInWithEmail:failure", task.getException());
+                                        Toast.makeText(LoginActivity.this, "Authentication failed.",
+                                                Toast.LENGTH_SHORT).show();
+                                        updateUI(null);
+                                    }
+
+                                    h.post(() -> {
+                                        backdropLoading.setVisibility(View.GONE);
+                                    });
+                                }
+                            });
+                }catch(Exception e) {
+
+                }
+            });
+
+            signupThread.start();
+
         } else if (v.getId() == R.id.btGoogleLogin) {
             this.backdropLoading.setVisibility(View.VISIBLE);
-            oneTapClient = Identity.getSignInClient(LoginActivity.this);
-            signInRequest = BeginSignInRequest.builder()
-                    .setGoogleIdTokenRequestOptions(BeginSignInRequest.GoogleIdTokenRequestOptions.builder()
-                            .setSupported(true)
-                            // Your server's client ID, not your Android client ID.
-                            .setServerClientId(getString(R.string.default_web_client_id))
-                            // Show all accounts on the device.
-                            .setFilterByAuthorizedAccounts(false)
-                            .build())
-                    .build();
 
-            oneTapClient.beginSignIn(signInRequest)
-                    .addOnSuccessListener(LoginActivity.this, new OnSuccessListener<BeginSignInResult>() {
-                        @Override
-                        public void onSuccess(BeginSignInResult result) {
-                            launcher.launch(new IntentSenderRequest.Builder(result.getPendingIntent().getIntentSender()).build());
-                            backdropLoading.setVisibility(View.GONE);
-                        }
-                    })
-                    .addOnFailureListener(LoginActivity.this, new OnFailureListener() {
-                        @Override
-                        public void onFailure(@NonNull Exception e) {
-                            // No Google Accounts found. Just continue presenting the signed-out UI.
-                            Log.d("TAG", e.getLocalizedMessage());
-                            backdropLoading.setVisibility(View.GONE);
-                        }
-                    });
+            Handler h = new Handler(Looper.getMainLooper());
+            Thread signupGoogleThread = new Thread(() -> {
+                try {
+                    oneTapClient = Identity.getSignInClient(LoginActivity.this);
+                    signInRequest = BeginSignInRequest.builder()
+                            .setGoogleIdTokenRequestOptions(BeginSignInRequest.GoogleIdTokenRequestOptions.builder()
+                                    .setSupported(true)
+                                    // Your server's client ID, not your Android client ID.
+                                    .setServerClientId(getString(R.string.default_web_client_id))
+                                    // Show all accounts on the device.
+                                    .setFilterByAuthorizedAccounts(false)
+                                    .build())
+                            .build();
+
+                    oneTapClient.beginSignIn(signInRequest)
+                            .addOnSuccessListener(LoginActivity.this, new OnSuccessListener<BeginSignInResult>() {
+                                @Override
+                                public void onSuccess(BeginSignInResult result) {
+                                    launcher.launch(new IntentSenderRequest.Builder(result.getPendingIntent().getIntentSender()).build());
+                                    h.post(() -> {
+                                        backdropLoading.setVisibility(View.GONE);
+                                    });
+                                }
+                            })
+                            .addOnFailureListener(LoginActivity.this, new OnFailureListener() {
+                                @Override
+                                public void onFailure(@NonNull Exception e) {
+                                    // No Google Accounts found. Just continue presenting the signed-out UI.
+                                    Log.d("TAG", e.getLocalizedMessage());
+                                    h.post(() -> {
+                                        backdropLoading.setVisibility(View.GONE);
+                                    });
+                                }
+                            });
+                }catch(Exception e) {
+
+                }
+            });
+
+            signupGoogleThread.start();
+
         }
 
     }
