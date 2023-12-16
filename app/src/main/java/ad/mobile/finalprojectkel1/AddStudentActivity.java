@@ -3,12 +3,16 @@ package ad.mobile.finalprojectkel1;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+
+import java.util.concurrent.ExecutionException;
 
 public class AddStudentActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -53,20 +57,32 @@ public class AddStudentActivity extends AppCompatActivity implements View.OnClic
     public void onClick(View v) {
         if(v.getId() == R.id.btAddMhs){
 
-            Mahasiswa mahasiswa = new Mahasiswa(
-                    this.etNamaMahasiswa.getText().toString(),
-                    this.etNIM.getText().toString(),
-                    this.etProdi.getText().toString(),
-                    this.etFakultas.getText().toString(),
-                    this.etEmail.getText().toString(),
-                    this.etAlamat.getText().toString(),
-                    this.etPhone.getText().toString(),
-                    null
-            );
+            Handler h = new Handler(Looper.getMainLooper());
 
-            this.appDb.child(this.etNIM.getText().toString()).setValue(mahasiswa);
+            Thread addMhsThread = new Thread(() -> {
+                try {
+                    Mahasiswa mahasiswa = new Mahasiswa(
+                            this.etNamaMahasiswa.getText().toString(),
+                            this.etNIM.getText().toString(),
+                            this.etProdi.getText().toString(),
+                            this.etFakultas.getText().toString(),
+                            this.etEmail.getText().toString(),
+                            this.etAlamat.getText().toString(),
+                            this.etPhone.getText().toString(),
+                            null
+                    );
 
-            finish();
+                    this.appDb.child(this.etNIM.getText().toString()).setValue(mahasiswa);
+
+                    h.post(() -> {
+                        finish();
+                    });
+                }catch(Exception e) {
+
+                }
+            });
+
+            addMhsThread.start();
         }
     }
 }
