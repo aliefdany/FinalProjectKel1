@@ -188,7 +188,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             this.backdropLoading.setVisibility(View.VISIBLE);
 
             Handler h = new Handler(Looper.getMainLooper());
-            Thread signupThread = new Thread(() -> {
+            Thread signinThread = new Thread(() -> {
                 try {
                     mAuth.signInWithEmailAndPassword(this.etEmail.getText().toString(), this.etPassword.getText().toString())
                             .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
@@ -217,13 +217,13 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 }
             });
 
-            signupThread.start();
+            signinThread.start();
 
         } else if (v.getId() == R.id.btGoogleLogin) {
             this.backdropLoading.setVisibility(View.VISIBLE);
 
             Handler h = new Handler(Looper.getMainLooper());
-            Thread signupGoogleThread = new Thread(() -> {
+            Thread signinGoogleThread = new Thread(() -> {
                 try {
                     oneTapClient = Identity.getSignInClient(LoginActivity.this);
                     signInRequest = BeginSignInRequest.builder()
@@ -261,7 +261,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 }
             });
 
-            signupGoogleThread.start();
+            signinGoogleThread.start();
 
         }
 
